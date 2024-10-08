@@ -176,6 +176,12 @@ function createCard(type, value, name, link, textColor = 'black') {
     cardLink.appendChild(card);
     cardLink.href = link.startsWith('http') ? link : `https://${link}`;
 
+    // Add drag-and-drop functionality
+    cardLink.setAttribute('draggable', true);
+    cardLink.addEventListener('dragstart', dragStart);
+    cardLink.addEventListener('dragover', dragOver);
+    cardLink.addEventListener('drop', drop);
+
     cardLink.addEventListener('click', (event) => {
         if (menu.classList.contains('active')) {
             event.preventDefault();
@@ -195,19 +201,45 @@ function loadBookmarks() {
     });
 }
 
+// Drag-and-drop functions
+function dragStart(event) {
+    draggedCard = event.currentTarget;
+    draggedCard.style.opacity = '0.5'; // Make it slightly transparent
+    setTimeout(() => {
+        draggedCard.style.display = 'none'; // Hide the card being dragged after the timeout
+    }, 0);
+}
+
+function dragOver(event) {
+    event.preventDefault(); // Allow the drop
+    this.classList.add('drop-zone'); // Highlight the drop target
+}
+
+function drop(event) {
+    event.preventDefault();
+    this.classList.remove('drop-zone'); // Remove highlight from drop target
+
+    if (draggedCard !== this) {
+        // Move the dragged card before the current card
+        section.insertBefore(draggedCard, this.nextSibling);
+    }
+
+    // Reset the card display and opacity after dropping
+    draggedCard.style.display = 'block';
+    draggedCard.style.opacity = '1'; // Reset opacity
+}
+
 // Search functionality
 const bSearchInput = document.querySelector('.search');
 bSearchInput.addEventListener('input', () => {
-    const searchTerm = bSearchInput.value.toLowerCase();  // Corrected from searchInput to bSearchInput
+    const searchTerm = bSearchInput.value.toLowerCase();
     const cards = section.querySelectorAll('.card');
 
     cards.forEach(card => {
-        const cardText = card.querySelector('.text').textContent.toLowerCase();  // Access the text inside the card
+        const cardText = card.querySelector('.text').textContent.toLowerCase();
         card.style.display = cardText.includes(searchTerm) ? '' : 'none';
     });
 });
-
-
 
 // Load body background
 function loadBodyBackground() {
@@ -223,7 +255,7 @@ function loadBodyBackground() {
     }
 }
 
-window.onload = () => {            
-   loadBookmarks();
-    loadBodyBackground();                
+window.onload = () => {
+    loadBookmarks();
+    loadBodyBackground();
 };
