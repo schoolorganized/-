@@ -195,3 +195,19 @@ input {
     text-align: left;
     cursor: pointer;
 }
+
+
+.card {
+    /* Existing styles */
+    cursor: grab; /* Change cursor to grab while dragging */
+}
+
+.card:active {
+    cursor: grabbing; /* Change cursor to grabbing when active */
+}
+
+/* Optional: Highlight card while being dragged over */
+.drop-zone {
+    outline: 2px dashed #fff; /* Outline style when dragging over */
+    outline-offset: -4px; /* Adjusts the outline distance */
+}
