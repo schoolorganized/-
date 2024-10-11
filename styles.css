@@ -5,7 +5,7 @@
     transition:300ms ease-in-out;
 }
 
-body {
+body { 
     background-color: gray;
     width: 100vw;
     height: 100vh;
