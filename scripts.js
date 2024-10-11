@@ -6,7 +6,7 @@ const addModal = document.getElementById("addModal");
 const bgModal = document.getElementById("bgModal");
 const closeModalButtons = document.querySelectorAll(".close");
 
-const modalAddBtn = document.getElementById("modalAddBtn");
+const modalAddBtn = document.getElementById("modalAddBtn"); 
 const modalValueInput = document.getElementById("modalValue");
 const modalNameInput = document.getElementById("modalName");
 const modalLinkInput = document.getElementById("modalLink");
