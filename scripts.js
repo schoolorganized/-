@@ -13,10 +13,12 @@ const modalLinkInput = document.getElementById("modalLink");
 const modalTextColorInput = document.getElementById("modalTextColor");
 
 const bgInput = document.getElementById("bgInput");
-const bgChangeBtn = document.getElementById("bgChangeBtn"); 
+const bgChangeBtn = document.getElementById("bgChangeBtn");
 
 const notesIcon = document.querySelector(".notes");
- 
+const calcIcon = document.querySelector(".calculator");
+
+
 
 let draggedCard = null;
 let editIndex = null;
@@ -86,7 +88,66 @@ function saveNotes() {
 
 createNoteButton.addEventListener('click', () => createNoteElement());
 
+
+
+
+
+
+
+
+
+
+const display = document.getElementById('calcDisplay');
+
+function appendToDisplay(value) {
+    display.value += value;
+}
+
+function clearDisplay() {
+    display.value = '';
+}
+
+function calculate() {
+    try {
+        // Handle implicit multiplication and evaluate the expression
+        let expression = display.value
+            .replace(/(\d)\(/g, '$1*(') // 3(3) => 3*(3)
+            .replace(/(\))(\d)/g, '$1*$2'); // (3)2 => (3)*2
+        const result = eval(expression);
+        display.value = result;
+    } catch (error) {
+        display.value = 'Error';
+    }
+}
+
+// Keyboard input functionality
+document.addEventListener('keydown', (event) => {
+    const key = event.key;
+
+    if ('0123456789+-*/()'.includes(key)) {
+        appendToDisplay(key);
+    } else if (key === 'Enter') {
+        event.preventDefault(); // Prevent default action to avoid clearing
+        calculate();
+    } else if (key === 'Backspace') {
+        display.value = display.value.slice(0, -1);
+    } else if (key === 'Escape') {
+        clearDisplay();
+    }
+});
+
+
+
+
+
+
+
+
+
+
 notesIcon.addEventListener("click", () => openNotes())
+calcIcon.addEventListener("click", () => openCalc())
+
 
 function openNotes() {
   document.getElementById("notesSidepanel").style.width = "300px";
@@ -94,6 +155,14 @@ function openNotes() {
 
 function closeNotes() {
   document.getElementById("notesSidepanel").style.width = "0";
+}
+
+function openCalc() {
+  document.getElementById("calcSidepanel").style.width = "300px";
+}
+
+function closeCalc() {
+  document.getElementById("calcSidepanel").style.width = "0";
 }
 
 addButton.addEventListener("click", () => {
