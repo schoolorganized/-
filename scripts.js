@@ -13,7 +13,7 @@ const modalLinkInput = document.getElementById("modalLink");
 const modalTextColorInput = document.getElementById("modalTextColor");
 
 const bgInput = document.getElementById("bgInput");
-const bgChangeBtn = document.getElementById("bgChangeBtn");
+const bgChangeBtn = document.getElementById("bgChangeBtn"); 
 
 const notesIcon = document.querySelector(".notes");
 
