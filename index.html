@@ -4,17 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
-    <link rel="icon" type="icon" href="https://i.ibb.co/qmPyQcg/Untitled-design-removebg-preview.png">
+    <link rel="icon" href="https://i.ibb.co/qmPyQcg/Untitled-design-removebg-preview.png" type="icon">
     <link rel="stylesheet" href="styles.css">
     <script src="scripts.js" defer></script>
-
+    <script src="https://kit.fontawesome.com/4f94aacad9.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <section class="search-section">
          <input type="text" class="search" placeholder="Search bookmarks...">
-         <input type="text" class="google" placeholder="Search google...">
-         <button class="searchGoogleBtn">Search</button>
+      <div class="icons">
+        <button class="notes"><i class="fa-regular fa-note-sticky"></i></button>
+      </div>
     </section>
+
+  
+    <div id="notesSidepanel" class="sidepanel">
+      <a href="javascript:void(0)" class="closebtn" onclick="closeNotes()">×</a>
+      <button class="createNote">Create Note</button>
+      <div class="notes-container"></div> <!-- Container for displaying notes -->
+    </div>
 
     <button class="add">+</button>
     <button class="change-body-bg">Change Background</button>
@@ -25,9 +33,17 @@
         <div class="modal-content">
             <span class="close">&times;</span>
             <h2>Add Bookmark</h2>
+            <br>
+            Image
             <input type="text" id="modalValue" placeholder="Enter color or image URL">
+          <br>
+            Name
             <input type="text" id="modalName" placeholder="Enter name">
+          <br>
+            Link
             <input type="text" id="modalLink" placeholder="Enter link">
+           <br>
+            Text Color
             <input type="text" id="modalTextColor" placeholder="Enter text color (default: black)" value="black">
             <button id="modalAddBtn">Add</button>
         </div>
