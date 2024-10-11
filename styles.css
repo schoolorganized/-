@@ -2,6 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    transition:300ms ease-in-out;
 }
 
 body {
@@ -124,8 +125,37 @@ input {
     border-radius: 5px;
 }
 
+.search-section input{
+    position:absolute;
+    left:60px;
+}
+
 .search-section{
-    margin-left: 200px;
+   margin-bottom:50px;
+  position:relative;
+}
+
+
+.icons{
+  position:absolute;
+  left:90%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+.icons button{
+  border-radius:50%;
+  width:40px;
+  height:40px;
+  background-color:darkblue;
+  color:white;
+  border:none;
+  outline:none;
+}
+.icons button:hover{
+  cursor:pointer;
+  background-color:lightblue;
 }
 
 
@@ -211,3 +241,111 @@ input {
     outline: 2px dashed #fff; /* Outline style when dragging over */
     outline-offset: -4px; /* Adjusts the outline distance */
 }
+
+#modalAddBtn{
+  padding:10px;
+  background-color:white;
+  border:1px solid black;
+  outline:none;
+}
+
+.sidepanel  {
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  height: 100%;
+  top: 0;
+  left: 0;
+  display:flex;
+  align-items:center;
+  flex-direction:column;
+  background-color: white;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+}
+
+.sidepanel a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: black;
+  display: block;
+  transition: 0.3s;
+}
+
+.sidepanel a:hover {
+  color: #f1f1f1;
+}
+
+.sidepanel .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+}
+
+.createNote{
+  width:100%;
+  height:40px;
+  color:black;
+  background-color:white;
+  border:none;
+  outline:none;
+  transition:300ms ease-in-out;
+}
+
+.createNote:hover{
+  background-color:#f2f2f2;
+}
+
+
+.note{
+  width:250px;
+  height:150px;
+  border:1px solid gray;
+  border-radius:20px;
+  position:relative;
+}
+
+.note textarea{
+  border:none;
+  outline:none;
+  resize:none;
+  margin-left:20px;
+  height:30%;
+}
+
+.note input{
+  border:none;
+  outline:none;
+  width:70%;
+  margin-left:10px;
+  margin-top:10px;
+}
+
+.note button{
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  height: 40px;
+  width: 58px;
+  background-color:#f1f1f1;
+  border:none;
+  outline:none;
+  font-size:15px;
+  transition:300ms ease-in-out;
+}
+
+.note button:hover{
+  background:#b0b0b0;
+  cursor:pointer;
+}
+
+.notes-container{
+  margin-top:20px;
+  overflow:scroll;
+  height:80%;
+}
+
+
