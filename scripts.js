@@ -16,7 +16,7 @@ const bgInput = document.getElementById("bgInput");
 const bgChangeBtn = document.getElementById("bgChangeBtn"); 
 
 const notesIcon = document.querySelector(".notes");
-
+ 
 
 let draggedCard = null;
 let editIndex = null;
