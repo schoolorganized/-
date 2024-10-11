@@ -15,26 +15,86 @@ const modalTextColorInput = document.getElementById("modalTextColor");
 const bgInput = document.getElementById("bgInput");
 const bgChangeBtn = document.getElementById("bgChangeBtn");
 
+const notesIcon = document.querySelector(".notes");
+
+
 let draggedCard = null;
 let editIndex = null;
 
-const searchButton = document.querySelector('.searchGoogleBtn');
-const searchInput = document.querySelector('.google');
 
-searchButton.addEventListener('click', function() {
-    const query = searchInput.value.trim();
-    
-    if (query) {
-        if (query.startsWith('http://') || query.startsWith('https://')) {
-            window.location.href = query;
+const createNoteButton = document.querySelector('.createNote');
+const notesContainer = document.querySelector('.notes-container');
+
+function loadNotes() {
+    const savedNotes = JSON.parse(localStorage.getItem('notes')) || [];
+    savedNotes.forEach(note => createNoteElement(note.title, note.content, note.done));
+}
+
+function createNoteElement(title = '', content = '', isDone = false) {
+    const noteDiv = document.createElement('div');
+    noteDiv.className = 'note';
+
+    const titleElement = document.createElement('input');
+    titleElement.placeholder = 'Enter title...';
+    titleElement.value = title;
+    titleElement.disabled = isDone;
+
+    const contentElement = document.createElement('textarea');
+    contentElement.placeholder = 'Enter note content...';
+    contentElement.value = content;
+    contentElement.disabled = isDone;
+
+    const doneButton = document.createElement('button');
+    doneButton.textContent = isDone ? 'Delete' : 'Done';
+
+    doneButton.addEventListener('click', (event) => {
+        event.stopPropagation();
+        if (doneButton.textContent === 'Done') {
+            titleElement.disabled = true;
+            contentElement.disabled = true;
+            doneButton.textContent = 'Delete';
         } else {
-            const googleSearchUrl = `https://www.google.com/search?q=${encodeURIComponent(query)}`;
-            window.open(googleSearchUrl, '_blank');
+            noteDiv.remove();
         }
-    } else {
-        alert('Please enter a search term or URL.');
-    }
-});
+        saveNotes();
+    });
+
+    noteDiv.addEventListener('click', () => {
+        if (doneButton.textContent === 'Delete') {
+            titleElement.disabled = false;
+            contentElement.disabled = false;
+            doneButton.textContent = 'Done';
+        }
+    });
+
+    noteDiv.appendChild(titleElement);
+    noteDiv.appendChild(contentElement);
+    noteDiv.appendChild(doneButton);
+    notesContainer.appendChild(noteDiv);
+}
+
+function saveNotes() {
+    const notes = [];
+    document.querySelectorAll('.note').forEach(noteDiv => {
+        const title = noteDiv.querySelector('input').value;
+        const content = noteDiv.querySelector('textarea').value;
+        const done = noteDiv.querySelector('button').textContent === 'Delete';
+        notes.push({ title, content, done });
+    });
+    localStorage.setItem('notes', JSON.stringify(notes));
+}
+
+createNoteButton.addEventListener('click', () => createNoteElement());
+
+notesIcon.addEventListener("click", () => openNotes())
+
+function openNotes() {
+  document.getElementById("notesSidepanel").style.width = "300px";
+}
+
+function closeNotes() {
+  document.getElementById("notesSidepanel").style.width = "0";
+}
 
 addButton.addEventListener("click", () => {
     addModal.style.display = "flex";
@@ -201,7 +261,6 @@ function loadBookmarks() {
     });
 }
 
-// Drag-and-drop functions
 function dragStart(event) {
     draggedCard = event.currentTarget;
     draggedCard.style.opacity = '0.5'; // Make it slightly transparent
@@ -229,7 +288,6 @@ function drop(event) {
     draggedCard.style.opacity = '1'; // Reset opacity
 }
 
-// Search functionality
 const bSearchInput = document.querySelector('.search');
 bSearchInput.addEventListener('input', () => {
     const searchTerm = bSearchInput.value.toLowerCase();
@@ -258,4 +316,5 @@ function loadBodyBackground() {
 window.onload = () => {
     loadBookmarks();
     loadBodyBackground();
+    loadNotes()
 };
