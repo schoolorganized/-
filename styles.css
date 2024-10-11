@@ -148,10 +148,12 @@ input {
   border-radius:50%;
   width:40px;
   height:40px;
-  background-color:darkblue;
+  background-color:#03bafc;
   color:white;
   border:none;
   outline:none;
+  margin-left:10px;
+  
 }
 .icons button:hover{
   cursor:pointer;
