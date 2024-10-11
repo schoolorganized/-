@@ -12,7 +12,7 @@ body {
     display: grid;
     justify-content: center;
     align-items: center;
-    grid-template-rows: auto auto 1fr; /* Allow scrolling */
+    grid-template-rows: auto auto 1fr;  /* Allow scrolling */
     overflow: hidden;
 }
 
