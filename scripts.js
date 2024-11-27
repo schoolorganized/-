@@ -398,3 +398,4 @@ preset2Button.addEventListener("click", () => {
     currentPreset = "preset2";
     loadBookmarks();
 });
+
