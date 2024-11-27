@@ -2,7 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    transition:300ms ease-in-out;
+    transition: 300ms ease-in-out;
 }
 
 body {
@@ -28,7 +28,6 @@ body {
     font-family: Arial, sans-serif;
     margin: 20px; 
 }
-
 
 .card {
     width: 150px;
