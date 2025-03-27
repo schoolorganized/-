@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,6 +8,7 @@
     <link rel="icon" href="https://i.ibb.co/xHbNbcq/New-Project.png" type="icon">
     <link rel="stylesheet" href="styles.css"> 
     <script src="scripts.js" defer></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.css">
     <script src="https://kit.fontawesome.com/4f94aacad9.js" crossorigin="anonymous"></script>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-78PQT2B4L5"></script>
     <script>
@@ -17,75 +19,40 @@
     </script>
 </head>
 <body>
-    <section class="search-section">
-         <input type="text" class="search" placeholder="Search bookmarks...">
-         <div class="icons">
-            <button class="preset-1">Pre 1</button>
-            <button class="preset-2">Pre 2</button>
-            <button class="calculator"><i class="fa-solid fa-calculator"></i></button>
-            <button class="notes"><i class="fa-regular fa-note-sticky"></i></button>
-            <button onclick="window.open('https://calendar.google.com', '_blank')">
-              <i class="fa-regular fa-calendar"></i>
-            </button>
-         </div>
-    </section>
+    <div class="container">
+        <section class="search-section">
+            <input type="text" class="search" placeholder="Search bookmarks...">
+            <div class="icons">
+                <button class="preset-1">Pre 1</button>
+                <button class="preset-2">Pre 2</button>
+                <button class="calculator"><i class="fa-solid fa-calculator"></i></button>
+                <button class="notes"><i class="fa-regular fa-note-sticky"></i></button>
+                <button onclick="window.open('https://calendar.google.com', '_blank')">
+                    <i class="fa-regular fa-calendar"></i>
+                </button>
+            </div>
+        </section>
 
-    <div id="notesSidepanel" class="sidepanel">
-      <a href="javascript:void(0)" class="closebtn" onclick="closeNotes()">×</a>
-      <button class="createNote">Create Note</button>
-      <div class="notes-container"></div>
-    </div>
-  
-    <div id="calcSidepanel" class="sidepanel">
-      <a href="javascript:void(0)" class="closebtn" onclick="closeCalc()">×</a>
-      <div class="calculator-container">
-          <input type="text" id="calcDisplay" disabled>
-          <div class="calc-buttons">
-              <button onclick="clearDisplay()">C</button>
-              <button onclick="appendToDisplay('7')">7</button>
-              <button onclick="appendToDisplay('8')">8</button>
-              <button onclick="appendToDisplay('9')">9</button>
-              <button onclick="appendToDisplay('*')">*</button>
-              <button onclick="appendToDisplay('4')">4</button>
-              <button onclick="appendToDisplay('5')">5</button>
-              <button onclick="appendToDisplay('6')">6</button>
-              <button onclick="appendToDisplay('-')">-</button>
-              <button onclick="appendToDisplay('1')">1</button>
-              <button onclick="appendToDisplay('2')">2</button>
-              <button onclick="appendToDisplay('3')">3</button>
-              <button onclick="appendToDisplay('+')">+</button>
-              <button onclick="appendToDisplay('0')">0</button>
-              <button onclick="calculate()">=</button>
-              <button onclick="appendToDisplay('(')"> ( </button>
-              <button onclick="appendToDisplay(')')"> ) </button>
-          </div>
-      </div>
+        <div class="section"></div>
+
+        <button class="add">+</button>
+        <button class="change-body-bg">BG</button>
     </div>
 
-    <button class="add">+</button>
-    <button class="change-body-bg">Change Background</button>
-    <div class="section"></div>
-
+    <!-- Modal for Adding Bookmarks -->
     <div id="addModal" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
             <h2>Add Bookmark</h2>
-            <br>
-            Image
             <input type="text" id="modalValue" placeholder="Enter color or image URL">
-            <br>
-            Name
             <input type="text" id="modalName" placeholder="Enter name">
-            <br>
-            Link
             <input type="text" id="modalLink" placeholder="Enter link">
-            <br>
-            Text Color
-            <input type="text" id="modalTextColor" placeholder="Enter text color (default: black)" value="black">
+            <input type="text" id="modalTextColor" placeholder="Enter text color (default: white)" value="white">
             <button id="modalAddBtn">Add</button>
         </div>
     </div>
 
+    <!-- Background Change Modal -->
     <div id="bgModal" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
@@ -94,6 +61,42 @@
             <button id="bgChangeBtn">Change</button>
         </div>
     </div>
+
+    <!-- Sidepanel for Notes -->
+    <div id="notesSidepanel" class="sidepanel">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNotes()">×</a>
+        <button class="createNote">Create Note</button>
+        <div class="notes-container"></div>
+    </div>
+
+    <!-- Sidepanel for Calculator -->
+    <div id="calcSidepanel" class="sidepanel">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeCalc()">×</a>
+        <div class="calculator-container">
+            <input type="text" id="calcDisplay" disabled>
+            <div class="calc-buttons">
+                <button onclick="clearDisplay()">C</button>
+                <button onclick="appendToDisplay('7')">7</button>
+                <button onclick="appendToDisplay('8')">8</button>
+                <button onclick="appendToDisplay('9')">9</button>
+                <button onclick="appendToDisplay('*')">*</button>
+                <button onclick="appendToDisplay('4')">4</button>
+                <button onclick="appendToDisplay('5')">5</button>
+                <button onclick="appendToDisplay('6')">6</button>
+                <button onclick="appendToDisplay('-')">-</button>
+                <button onclick="appendToDisplay('1')">1</button>
+                <button onclick="appendToDisplay('2')">2</button>
+                <button onclick="appendToDisplay('3')">3</button>
+                <button onclick="appendToDisplay('+')">+</button>
+                <button onclick="appendToDisplay('0')">0</button>
+                <button onclick="calculate()">=</button>
+                <button onclick="appendToDisplay('(')"> ( </button>
+                <button onclick="appendToDisplay(')')"> ) </button>
+            </div>
+        </div>
+    </div>
+
+      <script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.js"></script>
+
 </body>
 </html>
-
